@@ -1,11 +1,8 @@
 
+import Hackathon from './components/Hackathon.jsx'
 
 function App() {
-
-  return (
-    <>
-    </>
-  )
+  return <Hackathon />
 }
 
 export default App

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme{
@@ -6,6 +7,9 @@
   --color-accent: #38BDF8;
   --color-light: #E0F2FE;
   --color-text: #0F172A;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Sora", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 html { scroll-padding-top: 4rem; }
