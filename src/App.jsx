@@ -1,11 +1,7 @@
-
+import AboutSchedule from "./components/AboutSchedule";
 
 function App() {
-
-  return (
-    <>
-    </>
-  )
+  return <AboutSchedule />;
 }
 
-export default App
+export default App;
