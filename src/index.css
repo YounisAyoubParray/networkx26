@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme{
@@ -6,12 +7,17 @@
   --color-accent: #38BDF8;
   --color-light: #E0F2FE;
   --color-text: #0F172A;
-  --color-logoblue: #2D5BE0; 
-  --color-logored: #E11D2A;  
+  --color-logoblue: #2D5BE0;
+  --color-logored: #E11D2A;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Sora", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
-html { scroll-padding-top: 4rem; }
+html { scroll-padding-top: 4rem; scroll-behavior: smooth; }
 
-
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 html {
   scrollbar-color: #1D4ED8 #0B1B3F;
@@ -30,5 +36,5 @@ html {
   border: 2px solid #0B1B3F;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #38BDF8; 
+  background-color: #38BDF8;
 }

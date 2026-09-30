@@ -1,13 +1,27 @@
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
-import Countdown from "./components/Countdown"
+import AboutSchedule, { Venue } from "./components/AboutSchedule"
+import Speakers, { Team } from "./components/Speakers"
+import Hackathon from "./components/Hackathon"
+import Sponsors from "./components/Sponsors"
+import Faq from "./components/Faq"
 import Footer from "./components/Footer"
+
 function App() {
 
   return (
     <>
     <Navbar/>
-    <Hero/>
+    <main>
+      <Hero/>
+      <AboutSchedule/>
+      <Hackathon/>
+      <Speakers/>
+      <Sponsors/>
+      <Venue/>
+      <Team/>
+      <Faq/>
+    </main>
     <Footer/>
     </>
   )
