@@ -6,6 +6,29 @@
   --color-accent: #38BDF8;
   --color-light: #E0F2FE;
   --color-text: #0F172A;
+  --color-logoblue: #2D5BE0; 
+  --color-logored: #E11D2A;  
+}
+html { scroll-padding-top: 4rem; }
+
+
+
+html {
+  scrollbar-color: #1D4ED8 #0B1B3F;
+  scrollbar-width: thin;
 }
 
-html { scroll-padding-top: 4rem; }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1B3F;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #1D4ED8;
+  border-radius: 999px;
+  border: 2px solid #0B1B3F;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #38BDF8; 
+}
