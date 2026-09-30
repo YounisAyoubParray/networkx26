@@ -1,18 +1,49 @@
-// TODO: Replace with the official Google Form URL before publishing.
-export const REGISTRATION_URL = '#'
+export const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdUnIrPYWedx_kRDx17_j3Q_Sai0ptXXkp62lWgYcg6KgAEIw/viewform'
+
+export const REGISTRATION_COPY = {
+  registerButton: 'Register Now',
+  heading: 'Register your team',
+  intro: 'One registration per team. Registration is through Google Forms.',
+  timelineHeading: 'How it works',
+  timelineSteps: [
+    'Keep ready: name, college ID number and ID card photo or PDF of all 4 members.',
+    'Sign in with any Google account. This is needed to upload ID cards.',
+    'Fill in the team details and upload the ID cards.',
+    'Submit. The team leader is contacted by email.',
+  ],
+  teamLeaderContact: 'Only the team leader gives email and phone.',
+  brandWord: 'NETWORK',
+  brandX: 'X',
+  passTitleSuffix: 'Hackathon',
+  passDay: 'Day 1',
+  separator: ' · ',
+  passVenue: 'Offline · NIT Srinagar',
+  passDuration: '8 hours',
+  passTeamSize: '4 members per team',
+  passPrize: 'Prize pool ₹1,00,000',
+  checklistHeading: 'Before you start',
+  checklistItems: [
+    'Details of all 4 members',
+    'College ID number of every member',
+    'ID card photo or PDF (max 10 MB each)',
+    'A Google account to sign in',
+  ],
+  openFormButton: 'Open the registration form',
+  openFormNote: 'Opens Google Forms in a new tab. Sign in with any Google account.',
+  responsibilityNote: 'The team leader is responsible for making sure every member of the team is available and present for the full duration of the hackathon.',
+}
 
 const DURATION = '8 hours'
-const TEAM_SIZE = 'Teams of 3–4 members'
+const TEAM_SIZE = '4 members per team'
 const MODE = 'Offline at NIT Srinagar'
 const ELIGIBILITY = 'Students from NITs, IITs, Central Universities, State Universities and other engineering institutions across the country.'
 const WHAT_TO_BRING = 'A laptop and valid college ID.'
 
 export const hackathonData = {
   eventName: 'NETWORKX Hackathon',
-  day: 'Day 2 of NETWORKX',
+  day: 'Day 1 of NETWORKX',
   theme: 'Design. Deploy. Defend.',
   factsLabel: 'Event facts',
-  registerButtonLabel: 'Register Your Team',
   prizesLinkLabel: 'View Prizes',
   terminalCommands: ['design --network', 'deploy --infrastructure', 'defend --perimeter'],
   terminalDescription: 'Build an enterprise network. Test every layer.',
@@ -61,37 +92,4 @@ export const hackathonData = {
   secondPrize: { label: '2nd Prize', amount: '₹50,000' },
   thirdPrize: { label: '3rd Prize', amount: '₹10,000' },
   additionalPrizeCount: 0,
-  registrationIntroEyebrow: 'Team registration',
-  registrationIntroHeading: ['Build your team.', 'Bring your best.'],
-  registrationIntroCopy: 'Registration is open to teams of 3–4 members.',
-  registrationNote: 'Enter each team member’s name and upload their college ID card. Only the team leader’s contact details are collected.',
-  formLabels: {
-    teamName: 'Team name',
-    college: 'College / institution',
-    teamLeader: 'Team Leader',
-    member: 'Member',
-    name: 'Full name',
-    email: 'Email address',
-    leaderEmail: 'Team leader contact email',
-    idCard: 'College ID card (image or PDF)',
-    phone: 'Phone number',
-    consent: 'I confirm that these details are accurate and our team agrees to the event rules.',
-    leaderResponsibility: 'As team leader, I confirm that every registered team member will be available to participate for the full event.',
-    optional: 'Optional',
-    teamDetails: 'Team details',
-    teamMembers: 'Team members',
-    eventConfirmation: 'Event confirmation',
-    required: 'Required',
-    formTitle: 'Team registration',
-    submit: 'Submit team registration',
-    submitting: 'Submitting registration…',
-    success: 'Registration received',
-    successDetail: 'Your details were validated and logged locally. Backend registration is not connected yet.',
-  },
-  requiredError: 'This field is required.',
-  emailError: 'Enter a valid email address.',
-  phoneError: 'Enter a 10-digit phone number.',
-  idCardError: 'Upload a college ID card for this team member.',
-  consentError: 'Please confirm your team details.',
-  leaderResponsibilityError: 'The team leader must confirm member availability.',
 }

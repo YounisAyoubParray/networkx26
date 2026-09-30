@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { hackathonData } from '../data/hackathonData.js'
+import { hackathonData, REGISTRATION_COPY, REGISTRATION_URL } from '../data/hackathonData.js'
 import './Hackathon.css'
 
 const iconPaths = {
@@ -18,6 +18,10 @@ const iconPaths = {
 
 function Icon({ name, className = '' }) {
   return <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{iconPaths[name]}</svg>
+}
+
+function BrandName() {
+  return <span>{REGISTRATION_COPY.brandWord}<span className="text-accent">{REGISTRATION_COPY.brandX}</span></span>
 }
 
 function Intro() {
@@ -46,7 +50,7 @@ function Intro() {
           <p className="hackathon-description">{hackathonData.description}</p>
           <p className="hackathon-static-command">{hackathonData.terminalDescription}</p>
           <div className="hackathon-intro-actions">
-            <a className="hackathon-button" href="#register">{hackathonData.registerButtonLabel}<Icon name="arrow" /></a>
+            <a className="hackathon-button" href="#register">{REGISTRATION_COPY.registerButton}<Icon name="arrow" /></a>
             <a className="hackathon-button-ghost" href="#prizes">{hackathonData.prizesLinkLabel}<Icon name="arrow" /></a>
           </div>
         </div>
@@ -180,132 +184,37 @@ function PrizeCounter() {
   )
 }
 
-function Field({ name, label, type = 'text', required = true, error, autoComplete = 'off', accept, onChange }) {
-  const id = `hackathon-${name}`
-  return (
-    <div className="hackathon-field">
-      <label htmlFor={id}>{label}{required && <span aria-hidden="true"> *</span>}</label>
-      <input id={id} name={name} type={type} required={required} autoComplete={autoComplete} accept={accept} aria-invalid={Boolean(error)} aria-describedby={error ? `${id}-error` : undefined} onChange={onChange} />
-      {error && <span className="hackathon-field-error" id={`${id}-error`} role="alert">{error}</span>}
-    </div>
-  )
-}
-
-function MemberCard({ number, leader = false, optional = false, errors, clearError }) {
-  const labels = hackathonData.formLabels
-  return (
-    <fieldset className={`hackathon-member-card${optional ? ' is-optional' : ''}`}>
-      <legend><span>{labels.member} {number}{leader ? ` / ${labels.teamLeader}` : ''}</span>{optional && <span className="hackathon-optional-badge">{labels.optional}</span>}</legend>
-      <div className="hackathon-member-fields">
-        <Field name={`member${number}Name`} label={labels.name} required={!optional} error={errors[`member${number}Name`]} onChange={() => clearError(`member${number}Name`)} autoComplete={leader ? 'name' : 'off'} />
-        {leader && <Field name="leaderEmail" label={labels.leaderEmail} type="email" error={errors.leaderEmail} onChange={() => clearError('leaderEmail')} autoComplete="email" />}
-        <Field name={`member${number}IdCard`} label={labels.idCard} type="file" required={!optional} accept="image/*,.pdf" error={errors[`member${number}IdCard`]} onChange={() => clearError(`member${number}IdCard`)} />
-        {leader && <Field name="leaderPhone" label={labels.phone} type="tel" error={errors.leaderPhone} onChange={() => clearError('leaderPhone')} autoComplete="tel" />}
-      </div>
-    </fieldset>
-  )
-}
-
 function Registration() {
-  const labels = hackathonData.formLabels
-  const [errors, setErrors] = useState({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  function clearError(name) {
-    setErrors((current) => ({ ...current, [name]: undefined }))
-    setSubmitted(false)
-  }
-
-  function validate(formData) {
-    const nextErrors = {}
-    const required = ['teamName', 'college', 'member1Name', 'leaderEmail', 'leaderPhone', 'member2Name', 'member3Name']
-    required.forEach((name) => { if (!String(formData.get(name) ?? '').trim()) nextErrors[name] = hackathonData.requiredError })
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const email = String(formData.get('leaderEmail') ?? '').trim()
-    if (email && !emailPattern.test(email)) nextErrors.leaderEmail = hackathonData.emailError
-    for (const member of [1, 2, 3]) {
-      const idCard = formData.get(`member${member}IdCard`)
-      if (!(idCard instanceof File) || !idCard.size) nextErrors[`member${member}IdCard`] = hackathonData.idCardError
-    }
-    const optionalName = String(formData.get('member4Name') ?? '').trim()
-    const optionalIdCard = formData.get('member4IdCard')
-    if (optionalName && (!(optionalIdCard instanceof File) || !optionalIdCard.size)) nextErrors.member4IdCard = hackathonData.idCardError
-    if (!optionalName && optionalIdCard instanceof File && optionalIdCard.size) nextErrors.member4Name = hackathonData.requiredError
-    const phone = String(formData.get('leaderPhone') ?? '').replace(/\D/g, '')
-    if (phone.length !== 10) nextErrors.leaderPhone = hackathonData.phoneError
-    if (!formData.has('consent')) nextErrors.consent = hackathonData.consentError
-    if (!formData.has('leaderResponsibility')) nextErrors.leaderResponsibility = hackathonData.leaderResponsibilityError
-    return nextErrors
-  }
-
-  // TODO: connect to Google Form / backend API
-  async function handleSubmit(event) {
-    event.preventDefault()
-    if (isSubmitting) return
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    const nextErrors = validate(formData)
-    setErrors(nextErrors)
-    setSubmitted(false)
-    const firstError = Object.keys(nextErrors)[0]
-    if (firstError) {
-      form.querySelector(`[name="${firstError}"]`)?.focus()
-      return
-    }
-
-    setIsSubmitting(true)
-    const submission = Object.fromEntries(formData.entries())
-    submission.teamLeaderEmail = submission.leaderEmail
-    submission.members = [1, 2, 3, 4].map((number) => ({
-      name: submission[`member${number}Name`],
-      idCard: submission[`member${number}IdCard`],
-      ...(number === 1 ? { phone: String(submission.leaderPhone).replace(/\D/g, '') } : {}),
-    })).filter((member) => member.name || member.idCard?.size)
-    console.log('NETWORKX Hackathon registration:', submission)
-    await new Promise((resolve) => window.setTimeout(resolve, 650))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    form.reset()
-  }
-
   return (
-    <section className="hackathon-registration" id="register" aria-labelledby="registration-title">
+    <section className="hackathon-registration bg-light text-text" id="register" aria-labelledby="registration-title">
       <div className="hackathon-container hackathon-registration-layout">
-        <div className="hackathon-registration-intro hackathon-reveal">
-          <p className="hackathon-eyebrow">{hackathonData.registrationIntroEyebrow}</p>
-          <h2 id="registration-title">{hackathonData.registrationIntroHeading[0]}<br />{hackathonData.registrationIntroHeading[1]}</h2>
-          <p>{hackathonData.registrationIntroCopy}</p>
-          <p className="hackathon-organizer">{hackathonData.organizerPrefix} {hackathonData.organizer}.</p>
+        <div className="hackathon-registration-intro">
+          <h2 className="text-text" id="registration-title">{REGISTRATION_COPY.heading}</h2>
+          <p>{REGISTRATION_COPY.intro}</p>
+          <h3 className="hackathon-registration-subheading text-text">{REGISTRATION_COPY.timelineHeading}</h3>
+          <ol className="hackathon-registration-timeline text-primary">
+            {REGISTRATION_COPY.timelineSteps.map((step) => <li key={step}><span className="text-text">{step}</span></li>)}
+          </ol>
+          <p>{REGISTRATION_COPY.teamLeaderContact}</p>
         </div>
-        <form className="hackathon-form hackathon-reveal" noValidate onSubmit={handleSubmit}>
-          <div className="hackathon-form-heading"><h3>{labels.formTitle}</h3><p><span aria-hidden="true">*</span> {labels.required}</p></div>
-          <div className="hackathon-form-section">
-            <h4>{labels.teamDetails}</h4>
-            <div className="hackathon-form-grid">
-              <Field name="teamName" label={labels.teamName} error={errors.teamName} onChange={() => clearError('teamName')} />
-              <Field name="college" label={labels.college} error={errors.college} onChange={() => clearError('college')} autoComplete="organization" />
+        <div className="hackathon-registration-content">
+          <article className="hackathon-registration-pass bg-dark text-white">
+            <div className="hackathon-registration-pass-top border-b border-dashed border-white/40">
+              <h3 className="hackathon-registration-brand"><BrandName /> <span>{REGISTRATION_COPY.passTitleSuffix}</span></h3>
+              <p><strong className="font-bold text-accent">{REGISTRATION_COPY.passDay}</strong>{REGISTRATION_COPY.separator}{REGISTRATION_COPY.passVenue}</p>
+              <p>{REGISTRATION_COPY.passDuration}{REGISTRATION_COPY.separator}{REGISTRATION_COPY.passTeamSize}</p>
+              <p className="hackathon-registration-prize text-accent">{REGISTRATION_COPY.passPrize}</p>
             </div>
-          </div>
-          <div className="hackathon-form-section">
-            <h4>{labels.teamMembers} <small>{hackathonData.teamSize}</small></h4>
-            <div className="hackathon-members-grid">
-              {[1, 2, 3, 4].map((number) => <MemberCard key={number} number={number} leader={number === 1} optional={number === 4} errors={errors} clearError={clearError} />)}
+            <div className="hackathon-registration-pass-bottom">
+              <h4>{REGISTRATION_COPY.checklistHeading}</h4>
+              <ul className="hackathon-registration-checklist">
+                {REGISTRATION_COPY.checklistItems.map((item) => <li key={item}><Icon name="check" className="text-accent" /><span>{item}</span></li>)}
+              </ul>
+              <a className="hackathon-registration-button bg-primary text-white hover:bg-accent" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer">{REGISTRATION_COPY.openFormButton}<Icon name="arrow" className="hackathon-registration-arrow" /></a>
+              <p className="hackathon-registration-open-note">{REGISTRATION_COPY.openFormNote}</p>
             </div>
-          </div>
-          <div className="hackathon-form-section">
-            <h4>{labels.eventConfirmation}</h4>
-            <div className="hackathon-consent">
-              <label htmlFor="hackathon-consent"><input id="hackathon-consent" name="consent" type="checkbox" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? 'hackathon-consent-error' : undefined} onChange={() => clearError('consent')} /><span>{labels.consent}<b aria-hidden="true"> *</b></span></label>
-              {errors.consent && <span className="hackathon-field-error" id="hackathon-consent-error" role="alert">{errors.consent}</span>}
-              <label htmlFor="hackathon-leader-responsibility"><input id="hackathon-leader-responsibility" name="leaderResponsibility" type="checkbox" aria-invalid={Boolean(errors.leaderResponsibility)} aria-describedby={errors.leaderResponsibility ? 'hackathon-leader-responsibility-error' : undefined} onChange={() => clearError('leaderResponsibility')} /><span>{labels.leaderResponsibility}<b aria-hidden="true"> *</b></span></label>
-              {errors.leaderResponsibility && <span className="hackathon-field-error" id="hackathon-leader-responsibility-error" role="alert">{errors.leaderResponsibility}</span>}
-            </div>
-          </div>
-          {submitted && <div className="hackathon-success" role="status"><span><Icon name="check" /></span><div><b>{labels.success}</b><p>{labels.successDetail}</p></div></div>}
-          <button className="hackathon-submit" type="submit" disabled={isSubmitting}>{isSubmitting ? <><i className="hackathon-submit-spinner" />{labels.submitting}</> : <>{labels.submit}<Icon name="arrow" /></>}</button>
-          <p className="hackathon-form-note">{hackathonData.registrationNote}</p>
-        </form>
+          </article>
+        </div>
       </div>
     </section>
   )
