@@ -36,11 +36,14 @@ export default function Sponsors() {
             <p className="mt-3 text-slate-600">
               Interested in supporting the 1st Edition of NetworkX? We would love to hear from you.
             </p>
+            <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-slate-500">
+              Email us at
+            </p>
             <a
               href={`mailto:${CONTACT.email}?subject=Sponsoring%20NetworkX%202026`}
-              className="mt-6 inline-flex rounded-md bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-dark"
+              className="mt-1 inline-block select-all break-all text-xl font-bold text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:text-dark sm:text-2xl"
             >
-              Become a sponsor
+              {CONTACT.email}
             </a>
           </div>
         )}

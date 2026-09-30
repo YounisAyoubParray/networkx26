@@ -1,6 +1,6 @@
 // Registration is handled by Google Forms only. Paste the form's share link here;
 // while it is '#', the site shows "Registration opens soon".
-export const REGISTRATION_URL = '#'
+export const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdUnIrPYWedx_kRDx17_j3Q_Sai0ptXXkp62lWgYcg6KgAEIw/viewform'
 
 const DURATION = '8 hours'
 const TEAM_SIZE = 'Solo or teams of up to 4 (1–4 members)'
