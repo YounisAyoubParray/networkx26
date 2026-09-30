@@ -80,7 +80,7 @@ function App() {
       </section>
 
       {/* ABOUT */}
-      <section className="bg-light px-6 py-20 text-text sm:px-10 lg:px-20">
+      <section  id ="about" className="bg-light px-6 py-20 text-text sm:px-10 lg:px-20">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary">
