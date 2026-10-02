@@ -6,6 +6,8 @@ A responsive event landing page for the NetworkX hackathon hosted by NIT Srinaga
 
 NetworkX is the first edition of a technology-focused hackathon and speaker event at NIT Srinagar, bringing together students to explore networking, cybersecurity, cloud infrastructure, and automation through a hands-on competition.
 
+animation effect in nextworkx x is added.
+
 This project is built as a modern React + Vite frontend and is designed as a polished single-page marketing site for the event.
 
 ## Features
