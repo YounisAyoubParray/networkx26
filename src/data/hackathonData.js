@@ -3,7 +3,7 @@
 export const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdUnIrPYWedx_kRDx17_j3Q_Sai0ptXXkp62lWgYcg6KgAEIw/viewform'
 
 const DURATION = '8 hours'
-const TEAM_SIZE = 'Solo or teams of up to 4 (1–4 members)'
+const TEAM_SIZE = 'Solo or teams of up to 4 (1 to 4 members)'
 const MODE = 'Offline at NIT Srinagar'
 const ELIGIBILITY = 'Students from NITs, IITs, Central Universities, State Universities and other engineering institutions across the country.'
 const WHAT_TO_BRING = 'A laptop and valid college ID.'
@@ -65,13 +65,13 @@ export const hackathonData = {
   otherPrizes: ['4th', '5th', '6th', '7th'].map((place) => ({ label: `${place} Prize`, amount: '₹10,000' })),
   registrationIntroEyebrow: 'Team registration',
   registrationIntroHeading: ['Build your team.', 'Bring your best.'],
-  registrationIntroCopy: 'Registration is open to teams of 1–4 members. Solo participants are welcome.',
+  registrationIntroCopy: 'Registration is open to teams of 1 to 4 members. Solo participants are welcome.',
   registrationLabels: {
     title: 'Register on Google Forms',
     checklistHeading: 'Keep these ready',
     checklist: [
       'Team name and college / institution',
-      'Full name of every member (1–4)',
+      'Full name of every member (1 to 4)',
       'College ID card of every member (image or PDF)',
       'Team leader’s email and phone number',
     ],

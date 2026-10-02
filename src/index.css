@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme{
@@ -9,14 +8,69 @@
   --color-text: #0F172A;
   --color-logoblue: #2D5BE0;
   --color-logored: #E11D2A;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Sora", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
 }
 html { scroll-padding-top: 4rem; scroll-behavior: smooth; }
 
+/* Hero "X": thrown from the lower right in a high arc, lands and bounces into place,
+   underline draws, then glow + shine loop together.
+   Horizontal travel (translate) is steady while the height (transform) rises then falls,
+   which makes the arc. Distances are in em so the whole flight stays inside the hero. */
+.hero-x {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation:
+    hero-x-drift 1.3s cubic-bezier(0.3, 0.1, 0.6, 1) 0.2s both,
+    hero-x-in 2.6s 0.2s both,
+    hero-x-glow 3.2s ease-in-out 3.2s infinite;
+}
+.hero-x-underline {
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: hero-underline-in 0.6s cubic-bezier(0.65, 0, 0.35, 1) 2.6s forwards;
+}
+.hero-x-underline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: translateX(-100%);
+  animation: hero-underline-shine 3.2s ease-in-out 3.2s infinite;
+}
+
+@keyframes hero-x-drift {
+  from { translate: min(55vw, 9em) 0; }
+  to   { translate: 0 0; }
+}
+@keyframes hero-x-in {
+  0%    { opacity: 0; transform: translateY(3.5em) rotate(-380deg) scale(0.7); animation-timing-function: cubic-bezier(0.2, 0.6, 0.4, 1); }
+  6%    { opacity: 1; }
+  24%   { transform: translateY(-1.2em) rotate(-190deg) scale(0.9); animation-timing-function: cubic-bezier(0.6, 0, 0.85, 0.4); }
+  50%   { transform: translateY(0) rotate(0) scale(1.22, 0.75); animation-timing-function: cubic-bezier(0.15, 0.6, 0.4, 1); }
+  63.5% { transform: translateY(-45%) rotate(-6deg) scale(0.92, 1.1); animation-timing-function: cubic-bezier(0.6, 0, 0.85, 0.45); }
+  74%   { transform: translateY(0) scale(1.14, 0.85); animation-timing-function: cubic-bezier(0.15, 0.6, 0.4, 1); }
+  82%   { transform: translateY(-18%) rotate(3deg) scale(0.96, 1.05); animation-timing-function: cubic-bezier(0.6, 0, 0.85, 0.45); }
+  89%   { transform: translateY(0) scale(1.07, 0.93); animation-timing-function: cubic-bezier(0.15, 0.6, 0.4, 1); }
+  93.5% { transform: translateY(-6%) rotate(-1deg); animation-timing-function: cubic-bezier(0.6, 0, 0.85, 0.45); }
+  97.5% { transform: translateY(0) scale(1.02, 0.98); }
+  100%  { opacity: 1; transform: none; }
+}
+@keyframes hero-x-glow {
+  0%, 100% { text-shadow: 0 0 0 rgba(225, 29, 42, 0); }
+  50%      { text-shadow: 0 0 28px rgba(225, 29, 42, 0.6), 0 0 8px rgba(225, 29, 42, 0.4); }
+}
+@keyframes hero-underline-in {
+  to { transform: scaleX(1); }
+}
+@keyframes hero-underline-shine {
+  0%        { transform: translateX(-100%); }
+  35%, 100% { transform: translateX(100%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .hero-x, .hero-x-underline, .hero-x-underline::after { animation: none; }
+  .hero-x { translate: none; }
+  .hero-x-underline { transform: none; }
 }
 
 html {

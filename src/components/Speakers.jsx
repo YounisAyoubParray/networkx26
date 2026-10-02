@@ -283,12 +283,43 @@ export default function Speakers() {
   );
 }
 
-// Organizing team and faculty, rendered further down the page (after Sponsors).
+// Faculty and organizing team, rendered further down the page (after Sponsors).
 export function Team() {
   return (
     <div id="team" className="bg-white text-text">
-      {/* ==================== ORGANIZING TEAM ==================== */}
+      {/* ==================== FACULTY ==================== */}
       <section className="bg-white px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="font-semibold uppercase tracking-wider text-primary">
+              Guidance & Support
+            </p>
+
+            <h2 className="mt-2 text-3xl font-extrabold text-text md:text-4xl">
+              Faculty Coordinators & Patrons
+            </h2>
+
+            <p className="mt-4 text-slate-600">
+              Faculty members supporting and guiding the NetworkX
+              event.
+            </p>
+          </div>
+
+          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {faculty.map((person, index) => (
+              <PersonCard
+                key={index}
+                person={person}
+              />
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ==================== ORGANIZING TEAM ==================== */}
+      <section className="bg-light px-6 py-20">
         <div className="mx-auto max-w-6xl">
 
           <div className="mx-auto mb-12 max-w-2xl text-center">
@@ -312,37 +343,6 @@ export function Team() {
                 key={index}
                 person={person}
                 showLinkedIn
-              />
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ==================== FACULTY ==================== */}
-      <section className="bg-light px-6 py-20">
-        <div className="mx-auto max-w-6xl">
-
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <p className="font-semibold uppercase tracking-wider text-primary">
-              Guidance & Support
-            </p>
-
-            <h2 className="mt-2 text-3xl font-extrabold text-text md:text-4xl">
-              Faculty Coordinators & Patrons
-            </h2>
-
-            <p className="mt-4 text-slate-600">
-              Faculty members supporting and guiding the NetworkX
-              event.
-            </p>
-          </div>
-
-          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {faculty.map((person, index) => (
-              <PersonCard
-                key={index}
-                person={person}
               />
             ))}
           </div>

@@ -27,7 +27,6 @@ export default function Hero() {
         <div className="grid gap-10 md:grid-cols-[1.15fr_0.85fr] md:items-end md:gap-12 lg:gap-16">
           <div>
             <div className="mb-6 flex items-center gap-3">
-              <span className="h-px w-8 bg-accent" aria-hidden="true" />
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
                 {EVENT.edition} · {EVENT.institute} · {EVENT.year}
               </p>
@@ -36,9 +35,9 @@ export default function Hero() {
             <h1 className="text-6xl font-extrabold leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
               <span className="text-logoblue">Network</span>
               <span className="relative inline-block text-logored">
-                X
+                <span className="hero-x">X</span>
                 <span
-                  className="absolute -bottom-1 left-0 h-1 w-full rounded-full bg-logored/60"
+                  className="hero-x-underline absolute -bottom-1 left-0 h-1 w-full overflow-hidden rounded-full bg-logored/60"
                   aria-hidden="true"
                 />
               </span>
