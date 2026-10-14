@@ -178,6 +178,35 @@
 .hackathon-checklist svg { flex: 0 0 18px; width: 18px; height: 18px; margin-top: .12rem; color: var(--color-primary); }
 .hackathon-form-note { margin: .65rem 0 0; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-size: .66rem; text-align: center; }
 
+/* Payment popup (rendered in the top layer via <dialog>, so it sits outside .hackathon styles) */
+.hackathon-payment { width: min(560px, calc(100% - 2rem)); max-height: calc(100svh - 2rem); margin: auto; padding: 0; border: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent); border-radius: 8px; color: var(--color-text); background: var(--hackathon-white, #fff); box-shadow: 0 28px 70px color-mix(in srgb, var(--color-dark) 35%, transparent); line-height: 1.55; }
+.hackathon-payment[open] { animation: hackathon-payment-in .25s cubic-bezier(.2, .75, .25, 1); }
+.hackathon-payment::backdrop { background: color-mix(in srgb, var(--color-dark) 72%, transparent); backdrop-filter: blur(4px); }
+.hackathon-payment-panel { padding: clamp(1.1rem, 3vw, 1.7rem); }
+.hackathon-payment-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding-bottom: .9rem; margin-bottom: .9rem; border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 17%, transparent); }
+.hackathon-payment-head .hackathon-eyebrow { margin-bottom: .25rem; }
+.hackathon-payment-head h3 { margin: 0; color: var(--color-text); font-size: 1.3rem; letter-spacing: -.02em; }
+.hackathon-payment-close { flex: 0 0 auto; width: 36px; height: 36px; border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent); border-radius: 50%; color: var(--color-text); background: var(--color-light); font-size: 1.3rem; line-height: 1; cursor: pointer; transition: background .2s ease; }
+.hackathon-payment-close:hover { background: color-mix(in srgb, var(--color-primary) 14%, var(--color-light)); }
+.hackathon-payment-intro { margin: 0 0 .8rem; color: color-mix(in srgb, var(--color-text) 75%, transparent); font-size: .88rem; }
+.hackathon-payment-fee { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0 0 1rem; padding: .75rem 1rem; border-radius: 6px; color: #fff; background: linear-gradient(110deg, var(--color-dark), color-mix(in srgb, var(--color-primary) 80%, var(--color-dark))); }
+.hackathon-payment-fee span { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
+.hackathon-payment-fee strong { color: var(--color-accent); font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
+.hackathon-payment-fee small { color: #fff; font-size: .75rem; font-weight: 600; letter-spacing: 0; opacity: .8; }
+.hackathon-payment-steps {display: grid; gap: .45rem; margin: 0 0 1.1rem; padding: 0; list-style: none; counter-reset: payment-step; }
+.hackathon-payment-steps li { display: flex; align-items: flex-start; gap: .6rem; color: color-mix(in srgb, var(--color-text) 85%, transparent); font-size: .86rem; counter-increment: payment-step; }
+.hackathon-payment-steps li::before { display: grid; flex: 0 0 22px; height: 22px; place-items: center; border-radius: 50%; color: #fff; background: var(--color-primary); content: counter(payment-step); font-size: .7rem; font-weight: 800; }
+.hackathon-payment-bank { margin: 0; padding: .2rem 1rem; border: 1px solid color-mix(in srgb, var(--color-primary) 18%, transparent); border-radius: 6px; background: var(--color-light); }
+.hackathon-payment-bank div { padding: .65rem 0; border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 14%, transparent); }
+.hackathon-payment-bank div:last-child { border-bottom: 0; }
+.hackathon-payment-bank dt { color: color-mix(in srgb, var(--color-text) 60%, transparent); font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.hackathon-payment-bank dd { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin: .15rem 0 0; color: var(--color-text); font-size: .92rem; font-weight: 600; overflow-wrap: anywhere; }
+.hackathon-payment-bank dd.is-mono span { font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 700; letter-spacing: .04em; }
+.hackathon-copy { flex: 0 0 auto; padding: .25rem .6rem; border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent); border-radius: 4px; color: var(--color-primary); background: #fff; font: inherit; font-size: .7rem; font-weight: 700; cursor: pointer; transition: background .2s ease, color .2s ease; }
+.hackathon-copy:hover, .hackathon-copy.is-copied { color: #fff; background: var(--color-primary); }
+.hackathon-payment a:focus-visible, .hackathon-payment button:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+
+@keyframes hackathon-payment-in { from { opacity: 0; transform: translateY(14px) scale(.98); } }
 @keyframes hackathon-packet-travel { to { stroke-dashoffset: -1170; } }
 @keyframes hackathon-node-pulse { to { opacity: .56; filter: drop-shadow(0 0 2px var(--color-accent)); } }
 @keyframes hackathon-glow-breathe { to { opacity: .55; transform: scale(1.07); } }
