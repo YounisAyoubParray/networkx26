@@ -5,14 +5,14 @@ export const EVENT = {
   institute: "NIT Srinagar",
   theme: "Many Minds. One Network. Endless Possibilities.",
   days: [
-    { label: "Day 1", title: "NetworkX Hackathon", date: "28 October 2026" },
-    { label: "Day 2", title: "NetworkX Talks", date: "29 October 2026" },
+    { label: "Day 1", title: "NetworkX Hackathon", date: "30 October 2026" },
+    { label: "Day 2", title: "NetworkX Talks", date: "31 October 2026" },
   ],
   venue: {
     name: "Venue TBA", 
     address: "NIT Srinagar", 
   },
-  countdownTarget: "2026-10-28T11:00:00+05:30", // Day 1 hackathon start, 11:00 AM IST
+  countdownTarget: "2026-10-30T11:00:00+05:30", // Day 1 hackathon start, 11:00 AM IST
 };
 
 export const NAV_LINKS = [
