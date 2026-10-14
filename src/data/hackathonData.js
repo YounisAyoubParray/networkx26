@@ -1,6 +1,6 @@
 // Registration is handled by Google Forms only. Paste the form's share link here;
 // while it is '#', the site shows "Registration opens soon".
-export const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdUnIrPYWedx_kRDx17_j3Q_Sai0ptXXkp62lWgYcg6KgAEIw/viewform'
+export const REGISTRATION_URL = 'https://forms.gle/f43MWKpYHRbSTokC7'
 
 const DURATION = '8 hours'
 const TEAM_SIZE = 'Solo or teams of up to 4 (1 to 4 members)'
@@ -75,9 +75,34 @@ export const hackathonData = {
       'College ID card of every member (image or PDF)',
       'Team leader’s email and phone number',
     ],
-    open: 'Open registration form',
-    openNote: 'Opens the official Google Form in a new tab. ID cards are uploaded there.',
+    open: 'Register now',
+    openNote: 'Shows the payment details first, then the official Google Form. ID cards are uploaded there.',
     closed: 'Registration opens soon',
     closedNote: 'The registration link will be posted here once registration opens.',
+  },
+  // Bank details shown in the popup before the Google Form opens.
+  payment: {
+    eyebrow: 'Step 1 of 2',
+    title: 'Complete your payment',
+    intro: 'Pay the registration fee by bank transfer before filling in the registration form.',
+    feeLabel: 'Registration fee',
+    fee: '₹1,000',
+    feeNote: 'per team',
+    steps: [
+      'Note down the account details below.',
+      'Pay through IMPS, NEFT or net banking.',
+      'Take a screenshot and note your Transaction ID. You will attach both in the form.',
+    ],
+    bank: [
+      { label: 'Bank and branch', value: 'Jammu and Kashmir Bank, R.E.C.' },
+      { label: 'Account name', value: 'Director NIT IRG Other Receipts' },
+      { label: 'Account number', value: '0391040510000006', mono: true },
+      { label: 'IFSC code', value: 'JAKA0RECSGR', mono: true },
+      { label: 'MICR code', value: '190051054', mono: true },
+    ],
+    copy: 'Copy',
+    copied: 'Copied',
+    continue: 'I have paid ₹1,000, open registration form',
+    close: 'Close',
   },
 }

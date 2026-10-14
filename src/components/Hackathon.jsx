@@ -183,11 +183,68 @@ function PrizeCounter() {
   )
 }
 
+function CopyButton({ value }) {
+  const payment = hackathonData.payment
+  const [copied, setCopied] = useState(false)
+  const copy = () => {
+    navigator.clipboard?.writeText(value).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1600)
+    }).catch(() => {})
+  }
+  return <button type="button" className={`hackathon-copy${copied ? ' is-copied' : ''}`} onClick={copy} aria-label={`${payment.copy} ${value}`}>{copied ? payment.copied : payment.copy}</button>
+}
+
+// Bank details shown before the Google Form. A native <dialog> gives Escape to close,
+// focus trapping and the backdrop for free.
+function PaymentDialog({ open, onClose }) {
+  const ref = useRef(null)
+  const payment = hackathonData.payment
+
+  useEffect(() => {
+    const dialog = ref.current
+    if (!dialog) return undefined
+    if (open && !dialog.open) dialog.showModal()
+    if (!open && dialog.open) dialog.close()
+    document.documentElement.style.overflow = open ? 'hidden' : ''
+    return () => { document.documentElement.style.overflow = '' }
+  }, [open])
+
+  return (
+    <dialog ref={ref} className="hackathon-payment" aria-labelledby="payment-title" onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose() }}>
+      <div className="hackathon-payment-panel">
+        <div className="hackathon-payment-head">
+          <div>
+            <p className="hackathon-eyebrow">{payment.eyebrow}</p>
+            <h3 id="payment-title">{payment.title}</h3>
+          </div>
+          <button type="button" className="hackathon-payment-close" onClick={onClose} aria-label={payment.close}>&times;</button>
+        </div>
+        <p className="hackathon-payment-intro">{payment.intro}</p>
+        <p className="hackathon-payment-fee"><span>{payment.feeLabel}</span><strong>{payment.fee} <small>{payment.feeNote}</small></strong></p>
+        <ol className="hackathon-payment-steps">
+          {payment.steps.map((step) => <li key={step}>{step}</li>)}
+        </ol>
+        <dl className="hackathon-payment-bank">
+          {payment.bank.map(({ label, value, mono }) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd className={mono ? 'is-mono' : undefined}><span>{value}</span>{mono && <CopyButton value={value} />}</dd>
+            </div>
+          ))}
+        </dl>
+        <a className="hackathon-submit" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" onClick={onClose}>{payment.continue}<Icon name="arrow" /></a>
+      </div>
+    </dialog>
+  )
+}
+
 // Registration happens on Google Forms only: the site itself does not collect data,
 // so nothing is collected here. ID cards are uploaded inside the Google Form.
 function Registration() {
   const labels = hackathonData.registrationLabels
   const isOpen = REGISTRATION_URL && REGISTRATION_URL !== '#'
+  const [paymentOpen, setPaymentOpen] = useState(false)
 
   return (
     <section className="hackathon-registration" id="register" aria-labelledby="registration-title">
@@ -207,13 +264,14 @@ function Registration() {
             </ul>
           </div>
           {isOpen ? (
-            <a className="hackathon-submit" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer">{labels.open}<Icon name="arrow" /></a>
+            <button type="button" className="hackathon-submit" onClick={() => setPaymentOpen(true)}>{labels.open}<Icon name="arrow" /></button>
           ) : (
             <p className="hackathon-submit is-closed" role="status">{labels.closed}</p>
           )}
           <p className="hackathon-form-note">{isOpen ? labels.openNote : labels.closedNote}</p>
         </div>
       </div>
+      {isOpen && <PaymentDialog open={paymentOpen} onClose={() => setPaymentOpen(false)} />}
     </section>
   )
 }
