@@ -32,7 +32,7 @@ export default function Faq() {
     {
       question: "How long is the hackathon?",
       answer:
-        "The Day 1 hackathon on 28 October will run for 8 hours, starting at 11:00 AM.",
+        "The Day 1 hackathon on 30 October will run for 8 hours, starting at 11:00 AM.",
     },
   ];
 
