@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { hackathonData, REGISTRATION_URL } from '../data/hackathonData.js'
 import './Hackathon.css'
 
@@ -16,7 +16,7 @@ const iconPaths = {
   check: <><path d="m5 12 4 4L19 6" /></>,
 }
 
-function Icon({ name, className = '' }) {
+export function Icon({ name, className = '' }) {
   return <svg aria-hidden="true" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{iconPaths[name]}</svg>
 }
 
@@ -183,8 +183,7 @@ function PrizeCounter() {
   )
 }
 
-function CopyButton({ value }) {
-  const payment = hackathonData.payment
+function CopyButton({ value, payment }) {
   const [copied, setCopied] = useState(false)
   const copy = () => {
     navigator.clipboard?.writeText(value).then(() => {
@@ -197,9 +196,9 @@ function CopyButton({ value }) {
 
 // Bank details shown before the Google Form. A native <dialog> gives Escape to close,
 // focus trapping and the backdrop for free.
-function PaymentDialog({ open, onClose }) {
+export function PaymentDialog({ open, onClose, payment = hackathonData.payment, url = REGISTRATION_URL }) {
   const ref = useRef(null)
-  const payment = hackathonData.payment
+  const titleId = useId()
 
   useEffect(() => {
     const dialog = ref.current
@@ -211,12 +210,12 @@ function PaymentDialog({ open, onClose }) {
   }, [open])
 
   return (
-    <dialog ref={ref} className="hackathon-payment" aria-labelledby="payment-title" onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose() }}>
+    <dialog ref={ref} className="hackathon-payment" aria-labelledby={titleId} onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose() }}>
       <div className="hackathon-payment-panel">
         <div className="hackathon-payment-head">
           <div>
             <p className="hackathon-eyebrow">{payment.eyebrow}</p>
-            <h3 id="payment-title">{payment.title}</h3>
+            <h3 id={titleId}>{payment.title}</h3>
           </div>
           <button type="button" className="hackathon-payment-close" onClick={onClose} aria-label={payment.close}>&times;</button>
         </div>
@@ -229,11 +228,11 @@ function PaymentDialog({ open, onClose }) {
           {payment.bank.map(({ label, value, mono }) => (
             <div key={label}>
               <dt>{label}</dt>
-              <dd className={mono ? 'is-mono' : undefined}><span>{value}</span>{mono && <CopyButton value={value} />}</dd>
+              <dd className={mono ? 'is-mono' : undefined}><span>{value}</span>{mono && <CopyButton value={value} payment={payment} />}</dd>
             </div>
           ))}
         </dl>
-        <a className="hackathon-submit" href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" onClick={onClose}>{payment.continue}<Icon name="arrow" /></a>
+        <a className="hackathon-submit" href={url} target="_blank" rel="noopener noreferrer" onClick={onClose}>{payment.continue}<Icon name="arrow" /></a>
       </div>
     </dialog>
   )
@@ -267,9 +266,7 @@ function Registration() {
             <button type="button" className="hackathon-submit" onClick={() => setPaymentOpen(true)}>{labels.open}<Icon name="arrow" /></button>
           ) : (
             <p className="hackathon-submit is-closed" role="status">{labels.closed}</p>
-          )}
-          <p className="hackathon-form-note">{isOpen ? labels.openNote : labels.closedNote}</p>
-        </div>
+          )}        </div>
       </div>
       {isOpen && <PaymentDialog open={paymentOpen} onClose={() => setPaymentOpen(false)} />}
     </section>

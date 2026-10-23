@@ -67,7 +67,7 @@ export const hackathonData = {
   registrationIntroHeading: ['Build your team.', 'Bring your best.'],
   registrationIntroCopy: 'Registration is open to teams of 1 to 4 members. Solo participants are welcome.',
   registrationLabels: {
-    title: 'Register on Google Forms',
+    title: 'Register',
     checklistHeading: 'Keep these ready',
     checklist: [
       'Team name and college / institution',
@@ -76,9 +76,7 @@ export const hackathonData = {
       'Team leader’s email and phone number',
     ],
     open: 'Register now',
-    openNote: 'Shows the payment details first, then the official Google Form. ID cards are uploaded there.',
     closed: 'Registration opens soon',
-    closedNote: 'The registration link will be posted here once registration opens.',
   },
   // Bank details shown in the popup before the Google Form opens.
   payment: {
