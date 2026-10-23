@@ -3,6 +3,7 @@ import Hero from "./components/Hero"
 import AboutSchedule, { Venue } from "./components/AboutSchedule"
 import Speakers, { Team } from "./components/Speakers"
 import Hackathon from "./components/Hackathon"
+import Tickets from "./components/Tickets"
 import Sponsors from "./components/Sponsors"
 import Faq from "./components/Faq"
 import Footer from "./components/Footer"
@@ -17,6 +18,7 @@ function App() {
       <AboutSchedule/>
       <Hackathon/>
       <Speakers/>
+      <Tickets/>
       <Sponsors/>
       <Venue/>
       <Team/>

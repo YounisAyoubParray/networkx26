@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NAV_LINKS, REGISTER_HREF } from "../data/eventInfo";
+import { NAV_LINKS, REGISTER_HREF, TICKETS_HREF } from "../data/eventInfo";
 import Logo from "./Logo";
 
 export default function Navbar() {
@@ -37,6 +37,14 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={TICKETS_HREF}
+              className="rounded-md border border-white/25 px-3.5 py-2 text-[13px] font-semibold text-white transition-colors hover:border-accent hover:text-accent lg:px-4 lg:text-sm"
+            >
+              Buy Ticket
+            </a>
+          </li>
           <li>
             <a
               href={REGISTER_HREF}
@@ -80,6 +88,15 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            <li className="pt-3">
+              <a
+                href={TICKETS_HREF}
+                onClick={close}
+                className="block rounded-md border border-white/25 px-4 py-3 text-center font-semibold text-white hover:border-accent hover:text-accent"
+              >
+                Buy Ticket
+              </a>
+            </li>
             <li className="py-3">
               <a
                 href={REGISTER_HREF}

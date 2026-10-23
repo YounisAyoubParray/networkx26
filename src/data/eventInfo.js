@@ -25,6 +25,7 @@ export const NAV_LINKS = [
 ];
 
 export const REGISTER_HREF = "#register";
+export const TICKETS_HREF = "#tickets";
 
 export const CONTACT = {
   email: "networkx@nitsri.ac.in",
