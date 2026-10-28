@@ -32,7 +32,15 @@ export default function Faq() {
     {
       question: "How long is the hackathon?",
       answer:
-        "The Day 1 hackathon on 30 October will run for 8 hours, starting at 11:00 AM.",
+        "The Day 1 hackathon on 3 November will run for 8 hours, starting at 11:00 AM.",
+    },{
+      question: "What happens during the hackathon?",
+      answer:
+        "Questions and challenges will be provided to participants, who will then work to solve them.",
+    },{
+      question: "Internet connectivity?",
+      answer:
+        "Hackthon will have to work offline, so participants are expected to bring their own devices and work without internet connectivity.",
     },
   ];
 
