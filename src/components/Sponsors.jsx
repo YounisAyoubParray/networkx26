@@ -1,7 +1,12 @@
 import { CONTACT } from "../data/eventInfo";
 
 // Add sponsors here as they are confirmed, e.g. { name: "Company", logo: "/sponsors/company.svg", href: "https://..." }
-const SPONSORS = [];
+const SPONSORS = [
+  { name: "Omada by TP-Link", logo: "/sponsors/omada-tp-link.svg", href: "https://www.omadanetworks.com/" },
+  
+  { name: "Rising Kashmir", logo: "/sponsors/rising-kashmir.png", href: "https://risingkashmir.com/" },
+  { name: "J&K Bank", logo: "/sponsors/jk-bank.png", href: "https://www.jkbank.com/" },
+];
 
 export default function Sponsors() {
   return (
@@ -16,16 +21,16 @@ export default function Sponsors() {
         </h2>
 
         {SPONSORS.length > 0 ? (
-          <ul className="mt-12 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="mt-12 flex flex-wrap items-center justify-center gap-6">
             {SPONSORS.map((s) => (
-              <li key={s.name}>
+              <li key={s.name} className="w-full sm:w-72">
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-28 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                  className="flex h-40 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
                 >
-                  <img src={s.logo} alt={s.name} className="max-h-full max-w-full object-contain" />
+                  <img src={s.logo} alt={s.name} className="h-full w-full object-contain" />
                 </a>
               </li>
             ))}
